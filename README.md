@@ -10,7 +10,7 @@ The project provides read-only health checks and a deliberate backup command for
 
 - `scripts/health-check.sh`: checks disk, memory, and system load.
 - `scripts/backup.sh`: creates a timestamped archive of an explicitly selected directory.
-- `config/`: example settings.
+- `config/`: example command settings.
 - `tests/`: executable shell tests.
 - `docs/`: installation, configuration, workflow, and troubleshooting guides.
 
@@ -20,7 +20,7 @@ See [installation](docs/INSTALL.md) before running scripts on a Linux host.
 
 ## Development workflow
 
-Changes start in `feature/*` branches. Each pull request explains what changed, why, and how it was tested. Review and successful tests are required before merging into `main`.
+Changes start in `feature/*` branches. Each pull request explains what changed, why, and how it was tested. For team work, request review and run tests before merging into `main`.
 
 ## Branching strategy
 
