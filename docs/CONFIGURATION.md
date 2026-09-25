@@ -11,3 +11,11 @@ Both thresholds are percentages from 1 to 100. The check returns exit code 0 for
 ## Backup
 
 The backup command requires `--source` and `--destination`. The destination must be outside the source. The archive name includes a UTC timestamp and process ID to avoid overwriting an earlier backup.
+
+## Exit codes
+
+| Code | Meaning |
+| --- | --- |
+| 0 | Health is OK or backup completed. |
+| 1 | Health threshold reached. |
+| 2 | Invalid input or unavailable metrics. |
