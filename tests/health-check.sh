@@ -35,5 +35,6 @@ MemTotal:       1000 kB
 MemAvailable:    500 kB
 DATA
 output=$(PROC_ROOT="$fixture" bash "$repo/scripts/health-check.sh" --path "$repo")
-[[ $output == *'threshold: 90%'* ]]
+disk_line=${output%%$'\n'*}
+[[ $disk_line == *'threshold: 90%'* ]]
 echo 'health-check tests passed'
