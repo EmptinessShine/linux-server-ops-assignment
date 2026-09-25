@@ -40,7 +40,7 @@ disk_used=$(df -P "$TARGET_PATH" | awk 'NR==2 {gsub(/%/, "", $5); print $5}')
 mem_total=$(awk '$1=="MemTotal:" {print $2}' "$PROC_ROOT/meminfo")
 mem_available=$(awk '$1=="MemAvailable:" {print $2}' "$PROC_ROOT/meminfo")
 load_one=$(awk '{print $1}' "$PROC_ROOT/loadavg")
-if [[ ! $disk_used =~ ^[0-9]+$ || ! $mem_total =~ ^[0-9]+$ || ! $mem_available =~ ^[0-9]+$ ]] || ((mem_total == 0)); then
+if [[ ! $disk_used =~ ^[0-9]+$ || ! $mem_total =~ ^[0-9]+$ || ! $mem_available =~ ^[0-9]+$ ]] || ((mem_total == 0 || mem_available > mem_total || disk_used > 100)); then
   echo "Could not parse system metrics" >&2
   exit 2
 fi

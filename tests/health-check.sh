@@ -23,4 +23,11 @@ PROC_ROOT="$fixture" bash "$repo/scripts/health-check.sh" --disk-threshold 101 >
 status=$?
 set -e
 [[ $status -eq 2 ]]
+
+sed -i.bak 's/MemAvailable:    500/MemAvailable:   1500/' "$fixture/meminfo"
+set +e
+PROC_ROOT="$fixture" bash "$repo/scripts/health-check.sh" --path "$repo" > /dev/null 2>&1
+status=$?
+set -e
+[[ $status -eq 2 ]]
 echo 'health-check tests passed'
