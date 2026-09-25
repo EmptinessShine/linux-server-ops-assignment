@@ -32,7 +32,7 @@ Open an issue or describe the change in a pull request. Keep commits focused, up
 
 ## Testing
 
-Run `bash tests/run.sh`. The tests use temporary directories and do not require root.
+Run `bash tests/run.sh`. Both test scripts should print a passed message. They use temporary directories and do not require root.
 
 ## Troubleshooting
 
