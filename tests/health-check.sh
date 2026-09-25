@@ -30,4 +30,20 @@ PROC_ROOT="$fixture" bash "$repo/scripts/health-check.sh" --path "$repo" > /dev/
 status=$?
 set -e
 [[ $status -eq 2 ]]
+mkdir -p "$fixture/bin"
+cat > "$fixture/bin/df" <<'DATA'
+#!/usr/bin/env bash
+printf 'Filesystem 1024-blocks Used Available Capacity Mounted on\n'
+printf 'mock 100 95 5 95%% /\n'
+DATA
+chmod +x "$fixture/bin/df"
+cat > "$fixture/meminfo" <<'DATA'
+MemTotal:       1000 kB
+MemAvailable:    500 kB
+DATA
+set +e
+PATH="$fixture/bin:$PATH" PROC_ROOT="$fixture" bash "$repo/scripts/health-check.sh" --path "$repo" > /dev/null
+status=$?
+set -e
+[[ $status -eq 1 ]]
 echo 'health-check tests passed'
