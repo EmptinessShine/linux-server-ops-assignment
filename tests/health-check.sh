@@ -30,4 +30,14 @@ PROC_ROOT="$fixture" bash "$repo/scripts/health-check.sh" --path "$repo" > /dev/
 status=$?
 set -e
 [[ $status -eq 2 ]]
+cat > "$fixture/meminfo" <<'DATA'
+MemTotal:       1000 kB
+MemAvailable:    500 kB
+DATA
+output=$(PROC_ROOT="$fixture" bash "$repo/scripts/health-check.sh" --path "$repo")
+disk_line=${output%%$'\n'*}
+if [[ $disk_line != *'threshold: 90%'* ]]; then
+  echo "Unexpected default disk threshold: $disk_line" >&2
+  exit 1
+fi
 echo 'health-check tests passed'
